@@ -72,3 +72,11 @@ remote:
   auth:
     enabled: false              # AUTH_ENABLED
     token_secret: ""            # AUTH_TOKEN_SECRET
+
+# Контакти техпідтримки для блоку "ТЕХПІДТРИМКА" у шапці застосунку.
+# Усі поля за замовчуванням порожні; UI приховує весь блок, якщо нічого не задано,
+# і показує лише налаштовані контакти. Вкажіть тут власні канали зв'язку.
+support:
+  viber: ""                     # SUPPORT_VIBER - повний URL Viber (напр. "viber://chat?number=%2B380XXXXXXXXX")
+  telegram: ""                  # SUPPORT_TELEGRAM - повний URL Telegram (напр. "https://t.me/yourbot")
+  phone: ""                     # SUPPORT_PHONE - номер телефону для відображення (напр. "(095) 544 08 08")
