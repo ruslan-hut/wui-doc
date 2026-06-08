@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="logo/webchek-dark.svg">
+    <img src="logo/webchek-light.svg" alt="WebCheck" width="260">
+  </picture>
+</p>
+
 # WUI — Веб-панель керування для WebCheck POS
 
 Сучасна веб-панель для керування програмними реєстраторами розрахункових операцій (пРРО) [WebCheck](https://www.webchek.com.ua/ru/programmniy_rro/). Моніторинг POS-терміналів у реальному часі, перегляд історії транзакцій, формування фіскальних звітів та керування налаштуваннями пристроїв — усе з браузера.
