@@ -28,7 +28,6 @@ WUI — це єдиний виконуваний файл (`wui.exe`), який 
 
 ### Огляд та архітектура
 - [**DATABASE_SCHEMA.md**](DATABASE_SCHEMA.md) — схема баз даних пристроїв
-- [**WEBSOCKET_PROTOCOL.md**](WEBSOCKET_PROTOCOL.md) — специфікація протоколу WebSocket
 
 ### Конфігурація
 - [**config.example.yaml**](config.example.yaml) — приклад конфігураційного файлу з коментарями
