@@ -44,9 +44,6 @@ WUI — це єдиний виконуваний файл (`wui.exe`), який 
 ### Автентифікація та користувачі
 - [**USERS_DB_WINDOWS_APP.md**](USERS_DB_WINDOWS_APP.md) — контракт бази `users.db` для Windows-застосунку WebCheck
 
-### Дизайн інтерфейсу
-- [**DESIGN_POLICY.md**](DESIGN_POLICY.md) — стандарти UI/UX дизайну
-
 ### Інтеграція з WebCheck (OLE/COM)
 - [**webcheck/**](webcheck/README.md) — нотатки щодо інтеграції з WebCheck через OLE-автоматизацію
 
