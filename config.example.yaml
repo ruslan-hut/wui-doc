@@ -2,10 +2,11 @@
 #
 # Скопіюйте цей файл у configs/config.yaml та змініть за потреби.
 # Змінні середовища мають пріоритет над значеннями YAML (імена змінних середовища показано в коментарях).
+# Тривалості — у синтаксисі Go ("30s", "5m", "1h30m"); розміри — у байтах, якщо не вказано інше.
 
 server:
-  port: 8080                    # SERVER_PORT
-  host: "0.0.0.0"              # SERVER_HOST
+  port: 8080                    # SERVER_PORT - TCP-порт, на якому слухає UI
+  host: "127.0.0.1"             # SERVER_HOST - "127.0.0.1" лише локально; "0.0.0.0" - усі інтерфейси (доступ із LAN)
   read_timeout: 30s             # SERVER_READ_TIMEOUT
   write_timeout: 30s            # SERVER_WRITE_TIMEOUT
   no_browser: false             # SERVER_NO_BROWSER - встановіть true, щоб вимкнути автоматичне відкриття браузера
@@ -26,7 +27,7 @@ websocket:
     - "http://localhost:8080"
 
 webcheck:
-  path: "C:\\ProgramData\\WebCheck"  # WC_PATH - каталог, що містить settings.ini
+  path: "C:\\ProgramData\\WebCheck"  # WC_PATH - каталог, що містить settings.ini / dat.ini та users.db
 
 database:
   driver: "sqlite"              # DB_DRIVER
@@ -37,8 +38,9 @@ database:
 
 pos:
   scan_interval: 30s            # POS_SCAN_INTERVAL
-  timeout: 10s                  # POS_TIMEOUT - таймаут операції з базою даних
+  timeout: 15s                  # POS_TIMEOUT - таймаут операції з базою даних
   retry_attempts: 3             # POS_RETRY_ATTEMPTS
+  retry_backoff: 5s             # POS_RETRY_BACKOFF - затримка між повторними спробами запиту
   data_dir: "C:\\ProgramData\\WUI\\devices"  # POS_DATA_DIR
   log_dir: "C:\\ProgramData\\WUI\\logs"      # POS_LOG_DIR
 
@@ -48,7 +50,8 @@ ole:
   report_timeout: 60s           # OLE_REPORT_TIMEOUT
   use_mock: false               # OLE_USE_MOCK - true для розробки/тестування
   mock_delay: 3s                # OLE_MOCK_DELAY
-  use_native_ole: false         # OLE_USE_NATIVE
+  use_native_ole: false         # OLE_USE_NATIVE - лишайте false; підтримуваний шлях - cscript
+  cscript_bitness: ""           # OLE_CSCRIPT_BITNESS - "" (за PATH), "32" (SysWOW64), "64" (System32); має збігатися з реєстрацією COM-сервера
 
 license:
   enabled: true                 # LICENSE_HTTP_ENABLED
@@ -64,14 +67,24 @@ logging:
   max_backups: 3                # LOG_MAX_BACKUPS
   max_age: 28                   # LOG_MAX_AGE (дні)
 
+# Вихідне з'єднання до relay-сервера WUI (віддалена підтримка).
+# Коли увімкнено, екземпляр WUI набирає relay через постійний WebSocket і реєструє
+# свої фіскальні номери; підтримка відкриває сесію за PIN-кодом зі сторінки Remote Access.
 remote:
   enabled: false                # REMOTE_ENABLED
-  tls:
+  server_url: "wss://web.che.ck.ua/api/v1/agent/ws"  # REMOTE_SERVER_URL - кінцева точка relay (шлях фіксований relay-сервером)
+  tls:                          # клієнтський TLS-сертифікат (зарезервовано); лишайте порожнім за стандартного налаштування
     cert_file: ""               # TLS_CERT_FILE
     key_file: ""                # TLS_KEY_FILE
-  auth:
+  auth:                         # необов'язковий bearer-токен; для звичайного сценарію не потрібен (доступ авторизується PIN-кодом)
     enabled: false              # AUTH_ENABLED
     token_secret: ""            # AUTH_TOKEN_SECRET
+
+# Режим публічного демо-екземпляра. Вмикайте лише на виділеній машині з тестовими
+# даними POS - демо-сесії не мають контролю доступу, а UI публічно доступний.
+# Потребує remote.server_url та remote.auth.token_secret.
+demo:
+  enabled: false                # DEMO_ENABLED
 
 # Контакти техпідтримки для блоку "ТЕХПІДТРИМКА" у шапці застосунку.
 # Усі поля за замовчуванням порожні; UI приховує весь блок, якщо нічого не задано,
