@@ -1,0 +1,74 @@
+# Конфігурація застосунку WUI (значення за замовчуванням)
+#
+# Скопіюйте цей файл у configs/config.yaml та змініть за потреби.
+# Змінні середовища мають пріоритет над значеннями YAML (імена змінних середовища показано в коментарях).
+
+server:
+  port: 8080                    # SERVER_PORT
+  host: "0.0.0.0"              # SERVER_HOST
+  read_timeout: 30s             # SERVER_READ_TIMEOUT
+  write_timeout: 30s            # SERVER_WRITE_TIMEOUT
+  no_browser: false             # SERVER_NO_BROWSER - встановіть true, щоб вимкнути автоматичне відкриття браузера
+
+websocket:
+  path: "/ws"                   # WS_PATH
+  max_connections: 100          # WS_MAX_CONNECTIONS
+  read_buffer_size: 1024        # WS_READ_BUFFER_SIZE (байти)
+  write_buffer_size: 1024       # WS_WRITE_BUFFER_SIZE (байти)
+  max_message_size: 524288      # WS_MAX_MESSAGE_SIZE (512KB)
+  write_wait: 10s               # WS_WRITE_WAIT
+  pong_wait: 60s                # WS_PONG_WAIT
+  ping_period: 54s              # WS_PING_PERIOD (має бути < pong_wait)
+  max_reconnect_attempts: 10    # WS_MAX_RECONNECT_ATTEMPTS
+  reconnect_interval: 3s        # WS_RECONNECT_INTERVAL
+  allowed_origins:              # WS_ALLOWED_ORIGINS (через кому)
+    - "http://localhost:4200"
+    - "http://localhost:8080"
+
+webcheck:
+  path: "C:\\ProgramData\\WebCheck"  # WC_PATH - каталог, що містить settings.ini
+
+database:
+  driver: "sqlite"              # DB_DRIVER
+  dsn: "data/wui.db"           # DB_DSN
+  max_open_conns: 25            # DB_MAX_OPEN_CONNS
+  max_idle_conns: 5             # DB_MAX_IDLE_CONNS
+  conn_max_lifetime: 5m         # DB_CONN_MAX_LIFETIME
+
+pos:
+  scan_interval: 30s            # POS_SCAN_INTERVAL
+  timeout: 10s                  # POS_TIMEOUT - таймаут операції з базою даних
+  retry_attempts: 3             # POS_RETRY_ATTEMPTS
+  data_dir: "C:\\ProgramData\\WUI\\devices"  # POS_DATA_DIR
+  log_dir: "C:\\ProgramData\\WUI\\logs"      # POS_LOG_DIR
+
+ole:
+  class_name: "WebCheckServer.ClassFiscal"  # OLE_CLASS_NAME
+  timeout: 10s                  # OLE_TIMEOUT
+  report_timeout: 60s           # OLE_REPORT_TIMEOUT
+  use_mock: false               # OLE_USE_MOCK - true для розробки/тестування
+  mock_delay: 3s                # OLE_MOCK_DELAY
+  use_native_ole: false         # OLE_USE_NATIVE
+
+license:
+  enabled: true                 # LICENSE_HTTP_ENABLED
+  url: "http://lic.webchek.com.ua/licxml"  # LICENSE_HTTP_URL
+  timeout: 5s                   # LICENSE_HTTP_TIMEOUT
+
+logging:
+  level: "info"                 # LOG_LEVEL - debug, info, warn, error
+  format: "text"                # LOG_FORMAT - json (продакшн), text (розробка)
+  output: "stdout"              # LOG_OUTPUT - stdout, file, both
+  file_path: "logs/wui.log"    # LOG_FILE_PATH
+  max_size: 100                 # LOG_MAX_SIZE (МБ)
+  max_backups: 3                # LOG_MAX_BACKUPS
+  max_age: 28                   # LOG_MAX_AGE (дні)
+
+remote:
+  enabled: false                # REMOTE_ENABLED
+  tls:
+    cert_file: ""               # TLS_CERT_FILE
+    key_file: ""                # TLS_KEY_FILE
+  auth:
+    enabled: false              # AUTH_ENABLED
+    token_secret: ""            # AUTH_TOKEN_SECRET
