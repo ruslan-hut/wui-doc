@@ -37,7 +37,6 @@ WUI — це єдиний виконуваний файл (`wui.exe`), який 
 ### Розгортання та доступ
 - [**WINDOWS_SERVICE.md**](WINDOWS_SERVICE.md) — запуск `wui.exe` як служби Windows
 - [**APACHE_WINDOWS_REVERSE_PROXY.md**](APACHE_WINDOWS_REVERSE_PROXY.md) — налаштування зворотного проксі Apache на Windows
-- [**REMOTE_RELAY_DEPLOY.md**](REMOTE_RELAY_DEPLOY.md) — розгортання віддаленого ретранслятора (relay)
 
 ### Автентифікація та користувачі
 - [**USERS_DB_WINDOWS_APP.md**](USERS_DB_WINDOWS_APP.md) — контракт бази `users.db` для Windows-застосунку WebCheck
